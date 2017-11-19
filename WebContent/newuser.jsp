@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%
+	String username = (String)session.getAttribute("USERNAME");
+		if(username==null)
+			response.sendRedirect("index.jsp");
+%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -136,7 +143,7 @@ body, html {
         <div class="card card-container">
         	<h3 align="center">User Registration</h3>
         	<br/>
-            <form class="form-signin" onsubmit="FormSubmit(this)">
+            <form class="form-signin" method="post" action="NewUser" onsubmit="FormSubmit(this)">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="text" id="inputUserID" name="inputUserID" class="form-control" placeholder="User ID" required autofocus>
                 <input type="text" id="inputFirstName" name="inputFirstName" class="form-control" placeholder="First Name" required autofocus>

@@ -1,9 +1,11 @@
 package in.ac.adit.internet.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,23 +20,15 @@ public class NewUserController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		
 		InternetUser user = new InternetUser();
-<<<<<<< HEAD
-		user.setUserId("140010116047");
-		user.setFirstName("Hardip");
-		user.setLastName("Raj");
-		user.setEnrollmentNumber("140010116047");
-		user.setEmailId("hr02@gmail.com");
-=======
-		user.setUserId("140010116010");
-		user.setFirstName("Naitik");
-		user.setLastName("Parekh");
-		user.setEnrollmentNumber("14");
-		user.setEmailId("pn13@gmail.com");
->>>>>>> 4a0dfd718f525ce2728a1399dbfe8065af4bb1fd
-		user.setContactNumber("1234567890");
-		user.setDepartment("IT");
-		user.setUserType("Student");
 		
+		user.setUserId(request.getParameter("inputUserID"));
+		user.setFirstName(request.getParameter("inputFirstName"));
+		user.setLastName(request.getParameter("inputLastName"));
+		user.setEnrollmentNumber(request.getParameter("inputEnrollmentNumber"));
+		user.setEmailId(request.getParameter("inputEmail"));
+		user.setContactNumber(request.getParameter("inputContactNumber"));
+		user.setDepartment(request.getParameter("inputDepartment"));
+		user.setUserType(request.getParameter("inputUserType"));
 		
 		ServletContext context = getServletContext();
 		String db=context.getInitParameter("db");
@@ -42,8 +36,18 @@ public class NewUserController extends HttpServlet{
 		try {
 			dao = new AditInternetDAO(db);
 			dao.addUser(user);
+			
 //			dao.finalize();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		rd = request.getRequestDispatcher("home.jsp");
+		
+		try {
+			rd.forward(request,response);
+		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
