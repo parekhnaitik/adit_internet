@@ -3,14 +3,14 @@ package in.ac.adit.internet.bean;
 import java.util.Date;
 
 public class UserDevices {
-	int deviceId;
-	String userId;
-	Date startDate;
-	int validity;
-	Date endDate;
-	String deviceType;
-	String macAddress;
-	String ipAddress;
+	private int deviceId;
+	private String userId;
+	private Date startDate;
+	private int validity;
+	private Date endDate;
+	private String deviceType;
+	private String macAddress;
+	private String ipAddress;
 	//Date date = new SimpleDateFormat("dd/MM/yyyy").parse("12/05/2015");
 	public int getDeviceId() {
 		return deviceId;

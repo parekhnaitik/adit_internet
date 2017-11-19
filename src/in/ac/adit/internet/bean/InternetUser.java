@@ -1,14 +1,14 @@
 package in.ac.adit.internet.bean;
 
 public class InternetUser {
-	String userId;
-	String firstName;
-	String lastName;
-	String enrollmentNumber;
-	String emailId;
-	String contactNumber;
-	String department;
-	String userType;
+	private String userId;
+	private String firstName;
+	private String lastName;
+	private String enrollmentNumber;
+	private String emailId;
+	private String contactNumber;
+	private String department;
+	private String userType;
 	public String getUserId() {
 		return userId;
 	}

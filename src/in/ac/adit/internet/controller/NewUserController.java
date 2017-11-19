@@ -18,11 +18,19 @@ public class NewUserController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		
 		InternetUser user = new InternetUser();
+<<<<<<< HEAD
 		user.setUserId("140010116047");
 		user.setFirstName("Hardip");
 		user.setLastName("Raj");
 		user.setEnrollmentNumber("140010116047");
 		user.setEmailId("hr02@gmail.com");
+=======
+		user.setUserId("140010116010");
+		user.setFirstName("Naitik");
+		user.setLastName("Parekh");
+		user.setEnrollmentNumber("14");
+		user.setEmailId("pn13@gmail.com");
+>>>>>>> 4a0dfd718f525ce2728a1399dbfe8065af4bb1fd
 		user.setContactNumber("1234567890");
 		user.setDepartment("IT");
 		user.setUserType("Student");
@@ -34,6 +42,7 @@ public class NewUserController extends HttpServlet{
 		try {
 			dao = new AditInternetDAO(db);
 			dao.addUser(user);
+//			dao.finalize();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
