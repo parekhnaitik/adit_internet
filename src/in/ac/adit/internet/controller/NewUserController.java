@@ -18,11 +18,11 @@ public class NewUserController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		
 		InternetUser user = new InternetUser();
-		user.setUserId("14001011601");
-		user.setFirstName("Naitik");
-		user.setLastName("Parekh");
-		user.setEnrollmentNumber("14");
-		user.setEmailId("pn13@gmail.com");
+		user.setUserId("140010116047");
+		user.setFirstName("Hardip");
+		user.setLastName("Raj");
+		user.setEnrollmentNumber("140010116047");
+		user.setEmailId("hr02@gmail.com");
 		user.setContactNumber("1234567890");
 		user.setDepartment("IT");
 		user.setUserType("Student");

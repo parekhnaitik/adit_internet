@@ -3,10 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
- 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ADIT Internet</title>
@@ -72,27 +73,6 @@ body, html {
     min-height: 1em;
 }
 
-.reauth-email {
-    display: block;
-    color: #404040;
-    line-height: 2;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.form-signin #inputEmail,
-.form-signin #inputPassword {
-    direction: ltr;
-    height: 44px;
-    font-size: 16px;
-}
 
 .form-signin input[type=email],
 .form-signin input[type=password],
@@ -152,16 +132,61 @@ body, html {
 </style>
 </head>
 <body>
-
     <div class="container">
         <div class="card card-container">
-            <form class="form-signin">
+        	<h3 align="center">User Registration</h3>
+        	<br/>
+            <form class="form-signin" onsubmit="FormSubmit(this)">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input type="text" id="inputUserID" name="inputUserID" class="form-control" placeholder="User ID" required autofocus>
+                <input type="text" id="inputFirstName" name="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
+                <input type="text" id="inputLastName" name="inputLastName" class="form-control" placeholder="Last Name" required autofocus>
+                <input type="text" id="inputEnrollmentNumber" name="inputEnrollmentNumber" class="form-control" placeholder="Enrollment Number" autofocus>
+                <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <input type="text" id="inputContactNumber" name="inputContactNumber" class="form-control" placeholder="Contact Number" required autofocus>
+                <div class="form-group">
+	                <select id="inputDepartment" name="inputDepartment" class="form-control" onchange="DropDownChanged(this);" required>
+	                  <option value="" selected disabled hidden>Select Department</option>
+	                  <option value="Information Technology">Information Technology</option>
+	                  <option value="Computer Engineering">Computer Engineering</option>
+	                  <option value="Mechanical Engineering">Mechanical Engineering</option>
+	                  <option value="Civil Engineering">Civil Engineering</option>
+	                  <option value="Electrical Engineering">Electrical Engineering</option>
+	                  <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+	                  <option value="Food Processing Technology">Food Processing Technology</option>
+	                  <option value="Automobile Engineering">Automobile Engineering</option>
+	                  <option value="">Other</option>
+	                </select>
+                </div>
+                <input type="text" style="display:none;" name="inputDepartment" id="inputDepartmentOther" class="form-control" placeholder="Enter Department" autofocus/>
+                <div class="form-group">
+	                <select id="inputUserType" name="inputUserType" class="form-control" required>
+	                  <option value="" selected disabled hidden>Select User Type</option>
+	                  <option value="Student">Student</option>
+	                  <option value="Staff">Staff</option>
+	                </select>
+                </div>
+                <br/>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Add User</button>
             </form>
         </div>
-    </div></body>
-
+    </div>
+</body>
+<script type="text/javascript">
+                function DropDownChanged(oDDL) {
+                    var oTextbox = oDDL.form.elements["inputDepartmentOther"];
+                    if (oTextbox) {
+                        oTextbox.style.display = (oDDL.value == "") ? "" : "none";
+                        if (oDDL.value == "")
+                            oTextbox.focus();
+                    }
+                }
+                
+                function FormSubmit(oForm) {
+                    var oDDL = oForm.elements["inputDepartment"];
+                    var oTextbox = oForm.elements["inputDepartmentOther"];
+                    if (oDDL && oTextbox)
+                        oDDL.value = (oDDL.value == "") ? oTextbox.value : oDDL.value;
+                }
+</script> 
 </html>
