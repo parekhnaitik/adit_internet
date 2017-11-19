@@ -18,7 +18,7 @@ public class NewUserController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		
 		InternetUser user = new InternetUser();
-		user.setUserId("140010116019");
+		user.setUserId("14001011601");
 		user.setFirstName("Naitik");
 		user.setLastName("Parekh");
 		user.setEnrollmentNumber("14");

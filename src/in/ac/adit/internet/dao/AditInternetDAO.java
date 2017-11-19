@@ -22,7 +22,7 @@ public class AditInternetDAO {
 	}
 
 	public void addUser(InternetUser InternetUser) throws SQLException{
-		String query="insert into internet_user values('"+InternetUser.getUserId()+"','"+InternetUser.getFirstName()+"','"+InternetUser.getLastName()+"','"+InternetUser.getEnrollmentNumber()+"','"+InternetUser.getEmailId()+"','"+InternetUser.getContactNumber()+"','"+InternetUser.getDepartment()+"','"+InternetUser.getUserType()+"');";
+		String query="insert into internet_user (userId, firstName, lastName, enrollmentNumber, emailId, contactNumber, department, userType) values('"+InternetUser.getUserId()+"','"+InternetUser.getFirstName()+"','"+InternetUser.getLastName()+"','"+InternetUser.getEnrollmentNumber()+"','"+InternetUser.getEmailId()+"','"+InternetUser.getContactNumber()+"','"+InternetUser.getDepartment()+"','"+InternetUser.getUserType()+"');";
 		statement.execute(query);
 	}
 	
