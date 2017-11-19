@@ -15,7 +15,7 @@
 body, html {
     height: 100%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(160,216,239),rgb(221,241,249));
+    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
 }
 
 .card-container.card {
@@ -134,14 +134,14 @@ body, html {
 <body>
     <div class="container">
         <div class="card card-container">
-        	<h3 align="center">User Registration</h3>
+        	<h3 align="center">Add Devices</h3>
         	<br/>
             <form class="form-signin" onsubmit="FormSubmit(this)">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="text" id="inputUserID" name="inputUserID" class="form-control" placeholder="User ID" required autofocus>
                 <input type="text" id="inputFirstName" name="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
                 <input type="text" id="inputLastName" name="inputLastName" class="form-control" placeholder="Last Name" required autofocus>
-                <input type="text" onchange="validateEnrollmentNo()" id="inputEnrollmentNumber" name="inputEnrollmentNumber" class="form-control" placeholder="Enrollment Number" autofocus>
+                <input type="text" id="inputEnrollmentNumber" name="inputEnrollmentNumber" class="form-control" placeholder="Enrollment Number" autofocus>
                 <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <input type="text" id="inputContactNumber" name="inputContactNumber" class="form-control" placeholder="Contact Number" required autofocus>
                 <div class="form-group">
@@ -187,16 +187,6 @@ body, html {
                     var oTextbox = oForm.elements["inputDepartmentOther"];
                     if (oDDL && oTextbox)
                         oDDL.value = (oDDL.value == "") ? oTextbox.value : oDDL.value;
-                }
-                
-                function validateEnrollmentNo(){
-                	var enrollment = document.getElementById("inputEnrollmentNumber");
-                    var regex = ^[1-9][0-9]{0,11}$;
-                    alert(enrollment.value);
-                    if(regex.test(enrollment.value) == false){
-                   		document.form.inputEntollmentNumber.focus();
-                   		return false;
-                    }
                 }
 </script> 
 </html>
