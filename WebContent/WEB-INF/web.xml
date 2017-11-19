@@ -24,5 +24,13 @@
   	<url-pattern>/NewUser</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>LoginController</servlet-name>
+  	<servlet-class>in.ac.adit.internet.controller.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>LoginController</servlet-name>
+  	<url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
    
 </web-app>

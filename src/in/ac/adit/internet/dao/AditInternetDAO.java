@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import in.ac.adit.internet.bean.AdminUser;
 import in.ac.adit.internet.bean.InternetUser;
 
 
@@ -26,6 +27,25 @@ public class AditInternetDAO {
 		statement.execute(query);
 	}
 	
+	public boolean loginAuth(AdminUser aUser) {
+		String query = "select * from admin_user where username='"+aUser.getUsername()+"' and password='"+aUser.getPassword()+"';";
+		ResultSet rs = null;
+		try {
+			rs = statement.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if(rs.next())
+				return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 //	public boolean isAuthenticate(String username, String password){
 //		String query="select * from user where username='"+username+"' and password='"+password+"';";
 //		ResultSet rs=null;
@@ -44,7 +64,16 @@ public class AditInternetDAO {
 //		}
 //		return false;
 //	}
-	
+	public void finalize(){
+		System.out.println("DEstroyed!!");
+		try {
+			this.connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 
 }

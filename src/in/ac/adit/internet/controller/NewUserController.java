@@ -18,7 +18,7 @@ public class NewUserController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		
 		InternetUser user = new InternetUser();
-		user.setUserId("14001011601");
+		user.setUserId("140010116010");
 		user.setFirstName("Naitik");
 		user.setLastName("Parekh");
 		user.setEnrollmentNumber("14");
@@ -34,6 +34,7 @@ public class NewUserController extends HttpServlet{
 		try {
 			dao = new AditInternetDAO(db);
 			dao.addUser(user);
+//			dao.finalize();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
