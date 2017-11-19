@@ -2,7 +2,7 @@ package in.ac.adit.internet.bean;
 
 import java.util.Date;
 
-public class userDevices {
+public class UserDevices {
 	int deviceId;
 	String userId;
 	Date startDate;

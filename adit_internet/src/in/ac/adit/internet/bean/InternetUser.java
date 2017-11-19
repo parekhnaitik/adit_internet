@@ -1,6 +1,6 @@
 package in.ac.adit.internet.bean;
 
-public class internetUser {
+public class InternetUser {
 	String userId;
 	String firstName;
 	String lastName;

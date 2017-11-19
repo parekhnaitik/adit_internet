@@ -12,18 +12,17 @@
   
   <context-param>
   	<param-name>db</param-name>
-  	<param-value>jdbc:mysql://localhost:3306/test</param-value>
+  	<param-value>jdbc:mysql://localhost:3306/adit_internet</param-value>
   </context-param>
   
-  <!-- 
   <servlet>
-  	<servlet-name>LoginController</servlet-name>
-  	<servlet-class>in.ac.adit.LoginController</servlet-class>
+  	<servlet-name>NewUser</servlet-name>
+  	<servlet-class>in.ac.adit.internet.controller.NewUserController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>LoginController</servlet-name>
-  	<url-pattern>/LoginController</url-pattern>
+  	<servlet-name>NewUser</servlet-name>
+  	<url-pattern>/NewUser</url-pattern>
   </servlet-mapping>
-   -->
+  
    
 </web-app>
