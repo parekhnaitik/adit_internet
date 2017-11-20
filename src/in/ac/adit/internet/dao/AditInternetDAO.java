@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import in.ac.adit.internet.bean.AdminUser;
 import in.ac.adit.internet.bean.InternetUser;
+import in.ac.adit.internet.bean.UserDevices;
 
 
 public class AditInternetDAO {
@@ -27,6 +28,13 @@ public class AditInternetDAO {
 		String query="insert into internet_user (userId, firstName, lastName, enrollmentNumber, emailId, contactNumber, department, userType) values('"+InternetUser.getUserId()+"','"+InternetUser.getFirstName()+"','"+InternetUser.getLastName()+"','"+InternetUser.getEnrollmentNumber()+"','"+InternetUser.getEmailId()+"','"+InternetUser.getContactNumber()+"','"+InternetUser.getDepartment()+"','"+InternetUser.getUserType()+"');";
 		statement.execute(query);
 	}
+	
+	public void addDevice(UserDevices device) throws SQLException{
+		String query="insert into user_devices (userId, startDate, validity, endDate, deviceType, macAddress, ipAddress) values('"+device.getUserId()+"','"+device.getStartDate().toString()+"','"+device.getValidity()+"','"+device.getEndDate().toString()+"','"+device.getDeviceType()+"','"+device.getMacAddress()+"','"+device.getIpAddress()+"');";
+		statement.execute(query);
+	}
+
+	
 	
 	public boolean loginAuth(AdminUser aUser) {
 		String query = "select * from admin_user where username='"+aUser.getUsername()+"' and password='"+aUser.getPassword()+"';";
