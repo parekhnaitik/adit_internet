@@ -1,6 +1,7 @@
 package in.ac.adit.internet.controller;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -44,6 +45,8 @@ public class NewUserController extends HttpServlet{
 		}
 		
 		rd = request.getRequestDispatcher("home.jsp");
+//		ResultSet tableData = dao.getActiveUser();
+//		this.getServletConfig().getServletContext().setAttribute("tableData", tableData);
 		
 		try {
 			rd.forward(request,response);

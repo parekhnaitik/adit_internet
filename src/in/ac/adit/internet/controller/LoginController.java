@@ -1,6 +1,7 @@
 package in.ac.adit.internet.controller;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -30,7 +31,7 @@ public class LoginController extends HttpServlet{
 		String db=context.getInitParameter("db");
 		
 		try {
-			dao=new AditInternetDAO(db);
+			dao = new AditInternetDAO(db);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,6 +42,9 @@ public class LoginController extends HttpServlet{
 			session = request.getSession();
 			session.setAttribute("USERNAME", aUser.getUsername());
 			rd = request.getRequestDispatcher("home.jsp");
+			
+//			ResultSet tableData = dao.getActiveUser();
+//			this.getServletConfig().getServletContext().setAttribute("tableData", tableData);
 		}
 		else
 		{

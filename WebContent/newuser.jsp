@@ -192,8 +192,9 @@ body, html {
                 function FormSubmit(oForm) {
                     var oDDL = oForm.elements["inputDepartment"];
                     var oTextbox = oForm.elements["inputDepartmentOther"];
-                    if (oDDL && oTextbox)
-                        oDDL.value = (oDDL.value == "") ? oTextbox.value : oDDL.value;
+                    if(oDDL.value == "" && oTextbox.value != "")
+                    	document.getElementById("inputDepartment").value = oTextbox.value;  
+                    
                 }
                 
                 function validateEnrollmentNo(){

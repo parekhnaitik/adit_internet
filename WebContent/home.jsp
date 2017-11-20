@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="in.ac.adit.internet.dao.AditInternetDAO" %>
+<%@ page import="java.sql.SQLException" %>
 
 <%
 	String username = (String)session.getAttribute("USERNAME");
@@ -13,15 +16,20 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/DataTables/DataTables-1.10.16/css/jquery.dataTables.min.css"/>
  
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/DataTables/jQuery-3.2.1/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ADIT Internet</title>
 <style>
 body, html {
     height: 100%;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+    
 }
 
 .btn {
@@ -64,29 +72,64 @@ body, html {
 <div class="container">
 	<button class="btn btn-primary btn-adduser" type="submit" onclick="location.href='newuser.jsp';">Add User</button>
 </div>
-<!-- 
-    <div class="container">
-        <div class="card card-container">
-            <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" />
-            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-            </form>/form
-            <a href="#" class="forgot-password">
-                Forgot the password?
-            </a>
-        </div>/card-container
-    </div>/container</body>
- -->
+
 	Welcome <%=username %>
 	<a href="logout.jsp">Logout</a>
+	<%
+		AditInternetDAO dao = null; 
+		ServletContext context = getServletContext();
+		String db=context.getInitParameter("db");
+		try {
+			dao = new AditInternetDAO(db);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet tableData = dao.getActiveUser(); 
+	%>
+	<table id="example" class="display table table-hover table-striped" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>User Id</th>
+				<th>Name</th>
+				<th>Enrollment number</th>
+				<th>Email Id</th>
+				<th>Contact number</th>
+				<th>Department</th>
+				<th>User type</th>
+			</tr>
+		</thead>
+		<tbody>
+	<%	while(tableData.next()){
+			String userId = tableData.getString("userId");
+			String name = tableData.getString("firstName") + " "+ tableData.getString("lastName");
+			String enrollmentNumber = tableData.getString("enrollmentNumber");
+			String emailId = tableData.getString("emailId");
+			String contactNumber = tableData.getString("contactNumber");
+			String department = tableData.getString("department");
+			String userType = tableData.getString("userType");
+	%>
+			<tr>
+				<td><%= userId %></td>
+				<td><%= name %></td>
+				<td><%= enrollmentNumber %></td>
+				<td><%= emailId %></td>
+				<td><%= contactNumber %></td>
+				<td><%= department %></td>
+				<td><%= userType %></td>
+			</tr>
+	<%
+		}
+	%>
+		</tbody>
+	</table>
+	
+	<script>
+	$(document).ready(function() {
+	    $('#example').DataTable();
+	} );
+	</script>
+	
+	</body>
+	
 </html>
