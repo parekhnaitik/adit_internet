@@ -3,6 +3,7 @@ package in.ac.adit.internet.dao;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import in.ac.adit.internet.bean.AdminUser;
 import in.ac.adit.internet.bean.InternetUser;
@@ -46,6 +47,17 @@ public class AditInternetDAO {
 		return false;
 	}
 	
+	public ResultSet getActiveUser(){
+		String query = "select * from internet_user;";
+		ResultSet rs = null;
+		try {
+			rs = statement.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
 //	public boolean isAuthenticate(String username, String password){
 //		String query="select * from user where username='"+username+"' and password='"+password+"';";
 //		ResultSet rs=null;
