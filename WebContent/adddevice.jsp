@@ -13,13 +13,12 @@
 <title>ADIT Internet</title>
 <style>
 body, html {
-    height: 100%;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+	height:100%;
+	background-repeat: repeat;	
+    background: linear-gradient(rgb(160,216,239),rgb(221,241,249)) no-repeat center center fixed;
 }
 
 .card-container.card {
-    max-width: 350px;
     padding: 40px 40px;
 }
 
@@ -77,6 +76,8 @@ body, html {
 .form-signin input[type=email],
 .form-signin input[type=password],
 .form-signin input[type=text],
+.form-signin input[type=date],
+.form-signin input[type=number],
 .form-signin button {
     width: 100%;
     display: block;
@@ -129,52 +130,149 @@ body, html {
     color: rgb(12, 97, 33);
 }
 
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+.dateclass{
+    width:100%;
+}
+
+.dateclass.placeholderclass::before{
+    width:100%;
+    content:attr(placeholder);
+    background-color:#FFFFFF;
+}
+
+.dateclass.placeholderclass:hover::before{
+    width:0%;
+    content:"";
+}
+  
 </style>
 </head>
 <body>
     <div class="container">
-        <div class="card card-container">
-        	<h3 align="center">Add Devices</h3>
-        	<br/>
-            <form class="form-signin" onsubmit="FormSubmit(this)">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="text" id="inputUserID" name="inputUserID" class="form-control" placeholder="User ID" required autofocus>
-                <input type="text" id="inputFirstName" name="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
-                <input type="text" id="inputLastName" name="inputLastName" class="form-control" placeholder="Last Name" required autofocus>
-                <input type="text" id="inputEnrollmentNumber" name="inputEnrollmentNumber" class="form-control" placeholder="Enrollment Number" autofocus>
-                <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <input type="text" id="inputContactNumber" name="inputContactNumber" class="form-control" placeholder="Contact Number" required autofocus>
-                <div class="form-group">
-	                <select id="inputDepartment" name="inputDepartment" class="form-control" onchange="DropDownChanged(this);" required>
-	                  <option value="" selected disabled hidden>Select Department</option>
-	                  <option value="Information Technology">Information Technology</option>
-	                  <option value="Computer Engineering">Computer Engineering</option>
-	                  <option value="Mechanical Engineering">Mechanical Engineering</option>
-	                  <option value="Civil Engineering">Civil Engineering</option>
-	                  <option value="Electrical Engineering">Electrical Engineering</option>
-	                  <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
-	                  <option value="Food Processing Technology">Food Processing Technology</option>
-	                  <option value="Automobile Engineering">Automobile Engineering</option>
-	                  <option value="">Other</option>
-	                </select>
-                </div>
-                <input type="text" style="display:none;" name="inputDepartment" id="inputDepartmentOther" class="form-control" placeholder="Enter Department" autofocus/>
-                <div class="form-group">
-	                <select id="inputUserType" name="inputUserType" class="form-control" required>
-	                  <option value="" selected disabled hidden>Select User Type</option>
-	                  <option value="Student">Student</option>
-	                  <option value="Staff">Staff</option>
-	                </select>
-                </div>
-                <br/>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Add User</button>
-            </form>
-        </div>
+    <div class="card card-container-fluid">
+    	<div class="row">
+  			<div class="col-md-4">
+  				<table class="table">
+  					<tr>
+  					<td colspan="2" valign="middle" style="text-align:center; border:none;"><h3>User Details</h3></td>
+  					</tr>
+  					<tr>
+  						<td><h4>User ID:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>First Name:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Last Name:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Enrollment No:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Contact No:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Department:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>User Type:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>User Status:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  				</table>
+  			</div>
+  			<div class="col-md-4">
+  				<table class="table">
+  					<tr>
+  					<td colspan="2" valign="middle" style="text-align:center; border:none;"><h3>Devices</h3></td>
+  					</tr>
+  					<tr>
+  						<td><h4>User ID:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>First Name:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Last Name:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Enrollment No:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Contact No:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>Department:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>User Type:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  					<tr>
+  						<td><h4>User Status:</h4></td>
+  						<td><h4>140010116047</h4></td>
+  					</tr>
+  				</table>
+  			</div>
+  			<div class="col-md-4">
+  				<h3 align="center">Add Devices</h3>
+	        	<br/>
+	            <form class="form-signin" onsubmit="FormSubmit(this)">
+	                <input type="text" id="inputMAC" name="inputMAC" class="form-control" placeholder="MAC Address" maxlength="17" required autofocus>
+	                <input type="text" id="inputIP" name="inputIP" class="form-control" placeholder="IP Address" minlength="7" maxlength="15" onkeypress="return isNumber(event);" onblur="confirmIPAddress();" required autofocus>
+	                <div class="form-group">
+		                <select id="inputDeviceType" name="inputDeviceType" class="form-control" onchange="DropDownChanged(this);" required>
+		                  <option value="" selected disabled hidden>Select Device Type</option>
+		                  <option value="Laptop">Laptop</option>
+		                  <option value="Desktop">Desktop</option>
+		                  <option value="Desktop">Mobile</option>
+		                  <option value="Desktop">Tablet</option>
+		                  <option value="">Other</option>
+		                </select>
+	                </div>
+	                <input type="text" style="display:none;" name="inputDeviceType" id="inputDeviceTypeOther" class="form-control" placeholder="Enter Device" autofocus/>
+	                <input type="date" id="inputStartDate" name="inputStartDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="Start Date" required autofocus/>
+	                <input type="date" id="inputEndDate" name="inputEndDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="End Date" autofocus/>
+	                <input type="number" id="inputValidity" name="inputValidity" class="form-control" placeholder="Validity" autofocus>
+	                
+	                <br/>
+	                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Add Device</button>
+	            </form>
+  			</div>
+		</div>
+		</div>
     </div>
 </body>
 <script type="text/javascript">
                 function DropDownChanged(oDDL) {
-                    var oTextbox = oDDL.form.elements["inputDepartmentOther"];
+                    var oTextbox = oDDL.form.elements["inputDeviceTypeOther"];
                     if (oTextbox) {
                         oTextbox.style.display = (oDDL.value == "") ? "" : "none";
                         if (oDDL.value == "")
@@ -183,10 +281,72 @@ body, html {
                 }
                 
                 function FormSubmit(oForm) {
-                    var oDDL = oForm.elements["inputDepartment"];
-                    var oTextbox = oForm.elements["inputDepartmentOther"];
+                    var oDDL = oForm.elements["inputDeviceType"];
+                    var oTextbox = oForm.elements["inputDeviceTypeOther"];
                     if (oDDL && oTextbox)
                         oDDL.value = (oDDL.value == "") ? oTextbox.value : oDDL.value;
                 }
+                
+                function isNumber(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+                        return false;
+                    }
+                    return true;
+                }
+                
+                function confirmIPAddress() {
+                	   var ip = document.getElementById("inputIP");
+                	   if (ip.value.length >0 && ip.value.length<=15 ) { 
+                	      ip.style.background = "white";
+                	      var ipSlot=ip.value.split(".");
+                	      if(ipSlot.length==4){
+                	        for (var i=0;i<ipSlot.length;i++){
+                	        var l=ipSlot[i].length;
+                	            if (l >0 && l<=3){
+                	                if(ipSlot[i]>=0 && ipSlot[i]<256){}
+                	                else{
+                	                	ip.style.background = "pink";break ;return false;}
+                	            }else{
+                	                ip.style.background = "pink";break ;return false;
+                	            }
+                	        }
+                	    }else{
+                	    	ip.style.background = "pink";return false; }
+                	}
+                	else{
+                		ip.style.background = "pink";
+                	}
+                }
+                
+                length=1;
+                $("#inputMAC").focusin(function (evt) {
+                    $(this).keypress(function () {
+                        content=$(this).val();
+                        content1 = content.replace(/\:/g, '');
+                        length=content1.length;
+                        if(((length % 2) == 0) && length < 12 && length > 1){
+                            $('#inputMAC').val($('#inputMAC').val() + ':');
+                            }
+                    });
+                });
+                
+                /* 
+                var macAddress = document.getElementById("inputMAC");
+
+                function formatMAC(e) {
+                    var r = /([a-f0-9]{2})([a-f0-9]{2})/i,
+                        str = e.target.value.replace(/[^a-f0-9]/ig, "");
+
+                    while (r.test(str)) {
+                        str = str.replace(r, '$1' + ':' + '$2');
+                    }
+
+                    e.target.value = str.slice(0, 17);
+                };
+
+                macAddress.addEventListener("keyup", formatMAC, false); */
+                
 </script> 
 </html>
