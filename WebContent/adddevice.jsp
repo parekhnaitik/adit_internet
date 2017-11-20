@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="in.ac.adit.internet.bean.InternetUser" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -119,41 +120,42 @@ input[type=number]::-webkit-outer-spin-button {
     <div class="card card-container-fluid">
     	<div class="row">
   			<div class="col-md-4">
+  			<%
+  				InternetUser user=(InternetUser)request.getAttribute("USER");
+  			
+  			
+  			%>
   				<table class="table">
   					<tr>
   					<td colspan="2" valign="middle" style="text-align:center; border:none;"><h3>User Details</h3></td>
   					</tr>
   					<tr>
   						<td><h4>User ID:</h4></td>
-  						<td><h4>140010116047</h4></td>
+  						<td><h4><%= user.getUserId() %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>First Name:</h4></td>
-  						<td><h4>140010116047</h4></td>
-  					</tr>
-  					<tr>
-  						<td><h4>Last Name:</h4></td>
-  						<td><h4>140010116047</h4></td>
+  						<td><h4><%= user.getFirstName() + " " + user.getLastName() %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>Enrollment No:</h4></td>
-  						<td><h4>140010116047</h4></td>
+  						<td><h4><%= user.getEnrollmentNumber() %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>Contact No:</h4></td>
-  						<td><h4>140010116047</h4></td>
+  						<td><h4><%= user.getContactNumber() %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>Department:</h4></td>
-  						<td><h4>140010116047</h4></td>
+  						<td><h4><%= user.getDepartment() %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>User Type:</h4></td>
-  						<td><h4>140010116047</h4></td>
+  						<td><h4><%= user.getUserType() %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>User Status:</h4></td>
-  						<td><h4>140010116047</h4></td>
+  						<td><h4>comming soon</h4></td>
   					</tr>
   				</table>
   			</div>
@@ -199,7 +201,8 @@ input[type=number]::-webkit-outer-spin-button {
   			<div class="col-md-4">
   				<h3 align="center">Add Devices</h3>
 	        	<br/>
-	            <form class="form-signin" onsubmit="FormSubmit(this)">
+	            <form class="form-signin" onsubmit="FormSubmit(this)" action="NewDevice" method="post">
+	                <input type="hidden" id="inputUserId" name="inputUserId" value="<%= user.getUserId()  %>">
 	                <input type="text" id="inputMAC" name="inputMAC" class="form-control" placeholder="MAC Address" maxlength="17" required autofocus>
 	                <input type="text" id="inputIP" name="inputIP" class="form-control" placeholder="IP Address" minlength="7" maxlength="15" onkeypress="return isNumber(event);" onblur="confirmIPAddress();" required autofocus>
 	                <div class="form-group">
@@ -212,9 +215,9 @@ input[type=number]::-webkit-outer-spin-button {
 		                  <option value="">Other</option>
 		                </select>
 	                </div>
-	                <input type="text" style="display:none;" name="inputDeviceType" id="inputDeviceTypeOther" class="form-control" placeholder="Enter Device" autofocus/>
+	                <input type="text" style="display:none;" name="inputDeviceTypeOther" id="inputDeviceTypeOther" class="form-control" placeholder="Enter Device" autofocus/>
 	                <input type="date" id="inputStartDate" name="inputStartDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="Start Date" required autofocus/>
-	                <input type="date" id="inputEndDate" name="inputEndDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="End Date" autofocus/>
+	                <!-- input type="date" id="inputEndDate" name="inputEndDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="End Date" autofocus/>  -->
 	                <input type="number" id="inputValidity" name="inputValidity" class="form-control" placeholder="Validity" autofocus>
 	                
 	                <br/>
@@ -238,8 +241,9 @@ input[type=number]::-webkit-outer-spin-button {
                 function FormSubmit(oForm) {
                     var oDDL = oForm.elements["inputDeviceType"];
                     var oTextbox = oForm.elements["inputDeviceTypeOther"];
-                    if (oDDL && oTextbox)
-                        oDDL.value = (oDDL.value == "") ? oTextbox.value : oDDL.value;
+                    if(oDDL.value == "" && oTextbox.value != "")
+                    	document.getElementById("inputDeviceType").value = oTextbox.value;  
+                    
                 }
                 
                 function isNumber(evt) {
@@ -274,7 +278,7 @@ input[type=number]::-webkit-outer-spin-button {
                 		ip.style.background = "pink";
                 	}
                 }
-                
+                /*
                 length=1;
                 $("#inputMAC").focusin(function (evt) {
                     $(this).keypress(function () {
@@ -287,7 +291,7 @@ input[type=number]::-webkit-outer-spin-button {
                     });
                 });
                 
-                /* 
+                
                 var macAddress = document.getElementById("inputMAC");
 
                 function formatMAC(e) {

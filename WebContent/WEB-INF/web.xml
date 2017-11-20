@@ -33,4 +33,12 @@
   	<url-pattern>/LoginController</url-pattern>
   </servlet-mapping>
    
+  <servlet>
+  	<servlet-name>NewDevice</servlet-name>
+  	<servlet-class>in.ac.adit.internet.controller.NewDeviceController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NewDevice</servlet-name>
+  	<url-pattern>/NewDevice</url-pattern>
+  </servlet-mapping> 
 </web-app>
