@@ -43,8 +43,8 @@ public class NewUserController extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		rd = request.getRequestDispatcher("home.jsp");
+		request.setAttribute("USER", user);
+		rd = request.getRequestDispatcher("adddevice.jsp");
 //		ResultSet tableData = dao.getActiveUser();
 //		this.getServletConfig().getServletContext().setAttribute("tableData", tableData);
 		
