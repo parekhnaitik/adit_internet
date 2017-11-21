@@ -5,9 +5,9 @@ import java.util.Date;
 public class UserDevices {
 	private int deviceId;
 	private String userId;
-	private Date startDate;
+	private String startDate;
 	private int validity;
-	private Date endDate;
+	private String endDate;
 	private String deviceType;
 	private String macAddress;
 	private String ipAddress;
@@ -24,10 +24,10 @@ public class UserDevices {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 	public int getValidity() {
@@ -36,10 +36,10 @@ public class UserDevices {
 	public void setValidity(int validity) {
 		this.validity = validity;
 	}
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	public String getDeviceType() {

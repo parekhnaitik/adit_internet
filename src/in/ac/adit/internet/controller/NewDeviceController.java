@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -26,30 +28,23 @@ public class NewDeviceController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		
 		UserDevices device = new UserDevices();
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		
 		device.setUserId(request.getParameter("inputUserId"));
 		device.setMacAddress(request.getParameter("inputMAC"));
 		device.setIpAddress(request.getParameter("inputIP"));
 		device.setDeviceType(request.getParameter("inputDeviceType"));
-		try {
-			device.setStartDate(new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("inputStartDate")));
-		} catch (ParseException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		//device.setEndDate(new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("inputEndDate")));
 		device.setValidity(Integer.parseInt(request.getParameter("inputValidity")));
-		
-//		GregorianCalendar cal = new GregorianCalendar();
-//		cal.setTime(device.getStartDate());
-//		cal.add(Calendar.DATE, device.getValidity());
-//		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//		try {
-//			device.setEndDate(df.parse(df.format(cal.getTime())));
-//		} catch (ParseException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		try {
+			device.setStartDate(sdf.format(sdf.parse(request.getParameter("inputStartDate"))));
+			calendar.setTime(sdf.parse(device.getStartDate())); // parsed date and setting to calendar
+			calendar.add(Calendar.DATE, device.getValidity());
+			device.setEndDate(sdf.format(calendar.getTime()));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		ServletContext context = getServletContext();
 		String db=context.getInitParameter("db");
