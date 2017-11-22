@@ -40,5 +40,14 @@
   <servlet-mapping>
   	<servlet-name>NewDevice</servlet-name>
   	<url-pattern>/NewDevice</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ShowUser</servlet-name>
+  	<servlet-class>in.ac.adit.internet.controller.ShowUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ShowUser</servlet-name>
+  	<url-pattern>/ShowUser</url-pattern>
   </servlet-mapping> 
 </web-app>

@@ -127,11 +127,43 @@ input[type=number]::-webkit-outer-spin-button {
     	<div class="row">
   			<div class="col-md-4">
   			<%
-  				InternetUser user=(InternetUser)request.getAttribute("USER");
-  			%>
-  			<%
+  			String userId = (String) request.getAttribute("USERID");
+  			
+    		AditInternetDAO dao = null; 
+    		ServletContext context = getServletContext();
+    		String db=context.getInitParameter("db");
+    		try {
+    			dao = new AditInternetDAO(db);
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		ResultSet user = dao.getUser(userId);
+    		
+			String firstName=null;
+			String lastName=null;
+			String enrollmentNo=null;
+			String email=null;
+			String contactNo=null;
+			String department=null;
+			String userType=null;
+			String userStatus=null;
+    		
+    		
+    		while(user.next()){
+    			firstName = user.getString("firstName");
+    			lastName = user.getString("lastName");
+    			enrollmentNo = user.getString("enrollmentNumber");
+    			email = user.getString("emailId");
+    			contactNo = user.getString("contactNumber");
+    			department = user.getString("department");
+    			userType = user.getString("userType");
+    		}
+    		
+    		
+    		ResultSet device = dao.getDevice(userId);
+    		    		
 			int deviceId=0;
-			String userId=null;
 			String macAddress=null;
 			String ipAddress=null;
 			String deviceType=null;
@@ -139,16 +171,6 @@ input[type=number]::-webkit-outer-spin-button {
 			String EndDate=null;
   				UserDevices devicedata=null;
 
-        		AditInternetDAO dao = null; 
-        		ServletContext context = getServletContext();
-        		String db=context.getInitParameter("db");
-        		try {
-        			dao = new AditInternetDAO(db);
-        		} catch (SQLException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-        		ResultSet device = dao.getDevice(user.getUserId());
         		
         		while(device.next()){
         			deviceId = device.getInt("deviceId");
@@ -167,35 +189,35 @@ input[type=number]::-webkit-outer-spin-button {
   					</tr>
   					<tr>
   						<td><h4>User ID:</h4></td>
-  						<td><h4><%= user.getUserId() %></h4></td>
+  						<td><h4><%= userId %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>First Name:</h4></td>
-  						<td><h4><%= user.getFirstName() + " " + user.getLastName() %></h4></td>
+  						<td><h4><%= firstName + " " + lastName %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>Enrollment No:</h4></td>
-  						<td><h4><%= user.getEnrollmentNumber() %></h4></td>
+  						<td><h4><%= enrollmentNo  %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>Email:</h4></td>
-  						<td><h4><%= user.getEmailId() %></h4></td>
+  						<td><h4><%= email %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>Contact No:</h4></td>
-  						<td><h4><%= user.getContactNumber() %></h4></td>
+  						<td><h4><%= contactNo %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>Department:</h4></td>
-  						<td><h4><%= user.getDepartment() %></h4></td>
+  						<td><h4><%= department %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>User Type:</h4></td>
-  						<td><h4><%= user.getUserType() %></h4></td>
+  						<td><h4><%= userType %></h4></td>
   					</tr>
   					<tr>
   						<td><h4>User Status:</h4></td>
-  						<td><h4>coming soon</h4></td>
+  						<td><h4><%= userStatus %></h4></td>
   					</tr>
   				</table>
   			</div>
@@ -235,7 +257,7 @@ input[type=number]::-webkit-outer-spin-button {
   				<h3 align="center">Add Devices</h3>
 	        	<br/>
 	            <form class="form-signin" onsubmit="FormSubmit(this)" action="NewDevice" method="post">
-	                <input type="hidden" id="inputUserId" name="inputUserId" value="<%= user.getUserId()  %>">
+	                <input type="hidden" id="inputUserId" name="inputUserId" value="<%= userId  %>">
 	                <input type="text" id="inputMAC" name="inputMAC" class="form-control" placeholder="MAC Address" maxlength="17" required autofocus>
 	                <input type="text" id="inputIP" name="inputIP" class="form-control" placeholder="IP Address" minlength="7" maxlength="15" onkeypress="return isNumber(event);" onblur="confirmIPAddress();" required autofocus>
 	                <div class="form-group">
@@ -311,16 +333,27 @@ input[type=number]::-webkit-outer-spin-button {
                 		ip.style.background = "pink";
                 	}
                 }
+                
                  $(document).ready(function() {
 
-                	if(<%= userId %>!=null){
+                	if(<%= deviceId %>!=0){
                 		$("#devices").show();	
                 	}
                 	else
                 		$("#devices").hide();
                     
                 }); 
-               
+                
+
+<%--                 window.onload = function() {
+                	  var x = document.getElementById('devices');
+        				if(<%=device.getDeviceId()%>2!=2){
+          					x.style.display("block");
+          				}
+          				else
+          					x.style.display("none");
+         
+                	}; --%>
                 
                 length=1;
                 $("#inputMAC").focusin(function (evt) {

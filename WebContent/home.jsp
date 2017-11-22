@@ -63,6 +63,10 @@ body, html {
 <div class="container">
     <div class="card card-container">
     	<button class="btn btn-primary btn-adduser" type="submit" onclick="location.href='newuser.jsp';">Add User</button>
+    	<form action="ShowUser" method="post">
+    	<input type="text" name="showUser" placeholder="User ID"/>
+    	<button class="btn btn-primary btn-adduser" type="submit">Add Device</button>
+    	</form>
 	Welcome <%=username %>
 	<a href="logout.jsp">Logout</a>
 	<%

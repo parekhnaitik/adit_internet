@@ -33,6 +33,18 @@ public class AditInternetDAO {
 		String query="insert into user_devices (userId, startDate, validity, endDate, deviceType, macAddress, ipAddress) values('"+device.getUserId()+"','"+device.getStartDate().toString()+"','"+device.getValidity()+"','"+device.getEndDate().toString()+"','"+device.getDeviceType()+"','"+device.getMacAddress()+"','"+device.getIpAddress()+"');";
 		statement.execute(query);
 	}
+	
+	public ResultSet getDevice(String userID) throws SQLException{
+		String query="select * from user_devices where userId='"+userID+"';";
+		ResultSet rs = null;
+		try {
+			rs = statement.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
 
 	
 	
@@ -66,6 +78,19 @@ public class AditInternetDAO {
 		}
 		return rs;
 	}
+	
+	public ResultSet getUser(String userID){
+		String query = "select * from internet_user where userId='"+userID+"';";
+		ResultSet rs = null;
+		try {
+			rs = statement.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 //	public boolean isAuthenticate(String username, String password){
 //		String query="select * from user where username='"+username+"' and password='"+password+"';";
 //		ResultSet rs=null;
