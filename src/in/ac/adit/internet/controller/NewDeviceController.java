@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -30,21 +32,25 @@ public class NewDeviceController extends HttpServlet{
 		UserDevices device = new UserDevices();
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//		LocalDate ld = new LocalDate();
 		
 		device.setUserId(request.getParameter("inputUserId"));
 		device.setMacAddress(request.getParameter("inputMAC"));
 		device.setIpAddress(request.getParameter("inputIP"));
 		device.setDeviceType(request.getParameter("inputDeviceType"));
 		device.setValidity(Integer.parseInt(request.getParameter("inputValidity")));
-		try {
-			device.setStartDate(sdf.format(sdf.parse(request.getParameter("inputStartDate"))));
-			calendar.setTime(sdf.parse(device.getStartDate())); // parsed date and setting to calendar
-			calendar.add(Calendar.DATE, device.getValidity());
-			device.setEndDate(sdf.format(calendar.getTime()));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			device.setStartDate(sdf.format(sdf.parse(request.getParameter("inputStartDate"))));
+//			calendar.setTime(sdf.parse(device.getStartDate())); // parsed date and setting to calendar
+//			calendar.add(Calendar.DATE, device.getValidity());
+//			device.setEndDate(sdf.format(calendar.getTime()));
+//		} catch (ParseException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+		device.setStartDate(LocalDate.parse(request.getParameter("inputStartDate")).format(dtf));
+		device.setEndDate(LocalDate.parse(device.getStartDate()).plusDays(device.getValidity()).format(dtf));
 		
 		ServletContext context = getServletContext();
 		String db=context.getInitParameter("db");
