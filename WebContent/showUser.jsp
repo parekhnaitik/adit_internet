@@ -256,12 +256,14 @@ input[type=number]::-webkit-outer-spin-button {
   			<div class="col-md-4">
   				<h3 align="center">Add Devices</h3>
 	        	<br/>
-	            <form class="form-signin" onsubmit="FormSubmit(this)" action="NewDevice" method="post">
+	            <form class="form-signin" onsubmit="FormSubmit(this)" action="NewDevice" method="get">
+	            <div class="add-device">
 	                <input type="hidden" id="inputUserId" name="inputUserId" value="<%= userId  %>">
-	                <input type="text" id="inputMAC" name="inputMAC" class="form-control" placeholder="MAC Address" maxlength="17" required autofocus>
-	                <input type="text" id="inputIP" name="inputIP" class="form-control" placeholder="IP Address" minlength="7" maxlength="15" onkeypress="return isNumber(event);" onblur="confirmIPAddress();" required autofocus>
+	               	<div class="devices">
+	                <input type="text" id="inputMAC" name="inputMAC[1]" class="form-control" placeholder="MAC Address" maxlength="17" required autofocus/>
+	                <input type="text" id="inputIP" name="inputIP[1]" class="form-control" placeholder="IP Address" minlength="7" maxlength="15" onkeypress="return isNumber(event);" onblur="confirmIPAddress();" required autofocus/>
 	                <div class="form-group">
-		                <select id="inputDeviceType" name="inputDeviceType" class="form-control" onchange="DropDownChanged(this);" required>
+		                <select id="inputDeviceType" name="inputDeviceType[1]" class="form-control" onchange="DropDownChanged(this);" required>
 		                  <option value="" selected disabled hidden>Select Device Type</option>
 		                  <option value="Laptop">Laptop</option>
 		                  <option value="Desktop">Desktop</option>
@@ -270,12 +272,14 @@ input[type=number]::-webkit-outer-spin-button {
 		                  <option value="">Other</option>
 		                </select>
 	                </div>
-	                <input type="text" style="display:none;" name="inputDeviceTypeOther" id="inputDeviceTypeOther" class="form-control" placeholder="Enter Device" autofocus/>
-	                <input type="date" id="inputStartDate" name="inputStartDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="Start Date" required autofocus/>
-	                <!-- input type="date" id="inputEndDate" name="inputEndDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="End Date" autofocus/>  -->
-	                <input type="number" id="inputValidity" name="inputValidity" class="form-control" placeholder="Validity" autofocus>
-	                
+	                <input type="text" style="display:none;" name="inputDeviceTypeOther[1]" id="inputDeviceTypeOther" class="form-control" placeholder="Enter Device" autofocus/>
+	                <input type="date" id="inputStartDate" name="inputStartDate[1]" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="Start Date" required autofocus/>
+	                <!--  <input type="date" id="inputEndDate" name="inputEndDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="End Date" autofocus/> --> 
+	                <input type="number" id="inputValidity" name="inputValidity[1]" class="form-control" placeholder="Validity" autofocus>
+	                </div>
+	                </div>
 	                <br/>
+	                <button class="btn btn-lg btn-primary btn-add-device" type="button"><span class="glyphicon glyphicon-plus"></span>Add more device</button>
 	                <button class="btn btn-lg btn-primary" type="submit">Add Device</button>
 	            </form>
   			</div>
@@ -334,6 +338,11 @@ input[type=number]::-webkit-outer-spin-button {
                 	}
                 }
                 
+
+        			
+        			
+
+                
                  $(document).ready(function() {
 
                 	if(<%= deviceId %>!=0){
@@ -355,18 +364,56 @@ input[type=number]::-webkit-outer-spin-button {
          
                 	}; --%>
                 
-                length=1;
-                $("#inputMAC").focusin(function (evt) {
-                    $(this).keypress(function () {
-                        content=$(this).val();
-                        content1 = content.replace(/\:/g, '');
-                        length=content1.length;
-                        if(((length % 2) == 0) && length < 12 && length > 1){
-                            $('#inputMAC').val($('#inputMAC').val() + ':');
-                            }
-                    });
-                });
+
                 
+            	$(function(){
+            		
+        			$(document.body).on('click', '.btn-remove-device' ,function(){
+        				$(this).closest('.devices').remove();
+        			});
+        			
+	    			$('.btn-add-device').click(function(){
+	
+	    				var index = $('.devices').length + 1;
+	    				
+	    				$('.add-device').append(
+	    				'<div class="devices">'+	    						
+	    				'<input type="text" id="inputMAC" name="inputMAC['+length+']" class="form-control" placeholder="MAC Address" maxlength="17" required autofocus>'+
+		                '<input type="text" id="inputIP" name="inputIP['+length+']" class="form-control" placeholder="IP Address" minlength="7" maxlength="15" onkeypress="return isNumber(event);" onblur="confirmIPAddress();" required autofocus>'+
+		                '<div class="form-group">'+
+			                '<select id="inputDeviceType" name="inputDeviceType['+length+']" class="form-control" onchange="DropDownChanged(this);" required>'+
+			                  '<option value="" selected disabled hidden>Select Device Type</option>'+
+			                  '<option value="Laptop">Laptop</option>'+
+			                  '<option value="Desktop">Desktop</option>'+
+			                  '<option value="Desktop">Mobile</option>'+
+			                  '<option value="Desktop">Tablet</option>'+
+			                  '<option value="">Other</option>'+
+			                '</select>'+
+		                '</div>'+
+		                '<input type="text" style="display:none;" name="inputDeviceTypeOther['+length+']" id="inputDeviceTypeOther" class="form-control" placeholder="Enter Device" autofocus/>'+
+		                '<input type="date" id="inputStartDate" name="inputStartDate['+length+']" class="form-control dateclass placeholderclass" onClick="$(this).removeClass(\'placeholderclass\')" placeholder="Start Date" required autofocus/>'+
+		                <!-- input type="date" id="inputEndDate" name="inputEndDate" class="form-control dateclass placeholderclass" onClick="$(this).removeClass('placeholderclass')" placeholder="End Date" autofocus/>  -->
+		                '<input type="number" id="inputValidity" name="inputValidity['+length+']" class="form-control" placeholder="Validity" autofocus>'+
+						'<button class="btn btn-danger btn-remove-device" type="button"><span class="glyphicon glyphicon-remove"></span>Remove Device</button>'+
+						'</div>'
+	    				);
+	
+	    			});
+    			
+    		});
+
+            		length=1;
+                    $("#inputMAC").focusin(function (evt) {
+                        $(this).keypress(function () {
+                            content=$(this).val();
+                            content1 = content.replace(/\:/g, '');
+                            length=content1.length;
+                            if(((length % 2) == 0) && length < 12 && length > 1){
+                                $('#inputMAC').val($('#inputMAC').val() + ':');
+                                }
+                        });
+                    });
+            	
                 /*
                 var macAddress = document.getElementById("inputMAC");
 
